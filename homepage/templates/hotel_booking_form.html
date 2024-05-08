@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'form_hotel.css' %}" />
+    <title>Hoteller</title>
+  </head>
+  <body>
+    <header class="header">
+        <nav>
+          <h1 style="color: white;">The Hoteller</h1>
+          <div class="nav__bar">
+            <div class="nav__menu__btn" id="menu-btn">
+              <i class="ri-menu-line"></i>
+            </div>
+          </div>
+          <ul class="nav__links" id="nav-links">
+            <li><a href="http://127.0.0.1:8000/home">Home</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <section class="section__container booking__container">
+    <div class="container">
+    <div class="left-box">
+        <div class="hotel_dets">
+          <div>
+            <h2 class="hotel-name">{{hotel_name}}</h2>
+            <p class="hotel-location">{{location}}</p>
+          </div>
+          <div class="hotel-image">
+            <img src="/static/images/{{hotel_name}}/Hotel.jpg" alt="Hotel Image">
+          </div>
+        </div>
+        <br>
+        <form method=POST action=http://127.0.0.1:8000/home/final_page/ >
+          {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title *</label>
+                <select id="title" name="title" required>
+                    <option value="Mr">Mr</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Miss">Miss</option>
+                    <option value="Ms">Ms</option>
+                </select>
+            </div>
+            <input type="hidden" name="hotel_name" value="{{hotel_name}}">
+            <input type="hidden" name="in_date" value="{{check_in}}">
+            <input type="hidden" name="out_date" value="{{check_out}}">
+            <input type="hidden" name="location" value="{{location}}">
+            <div class="form-group">
+                <label for="first-name">First Name *</label>
+                <input type="text" id="first-name" name="first-name" required>
+                <label for="last-name">Last Name *</label>
+                <input type="text" id="last-name" name="last-name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone *</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="special-requests">Special Requests</label>
+                <textarea id="special-requests" name="special-requests" rows="3"></textarea>
+            </div>
+            <button class="btn">Submit</button>
+        </form>
+    </div>
+    <div class="right-box">
+      <br>
+        <div class="total-fare">
+          <br>
+            <p>Price: <span style="float: right;">₹{{base_price}}</span></p>
+            <br>
+            <p>Tax: <span style="float: right;">₹{{tax_price}}</span></p>
+            <br>
+            <hr>
+            <br>
+            <p>Total Fare: <span style="float: right;">₹{{total_price}}</span></p>
+        </div>
+    </div>
+</div>
+    </section>
+    <br>
+    <br>
+    <br>
+
+
+    <footer class="footer" id="contact">
+        <div class="footer__container">
+          <div class="footer__col">
+            <p class="section__description">
+              Discover a world of comfort, luxury, and adventure as you explore
+              our curated selection of hotels, making every moment of your getaway
+              truly extraordinary.
+            </p>
+            <button class="btn">Booking History</button>
+          </div>
+          <div class="footer__col">
+            <h4>QUICK LINKS</h4>
+            <ul class="footer__links">
+              <li><a href="#">Browse Destinations</a></li>
+              <li><a href="#">Special Offers & Packages</a></li>
+              <li><a href="#">Room Types & Amenities</a></li>
+              <li><a href="#">Customer Reviews & Ratings</a></li>
+              <li><a href="#">Travel Tips & Guides</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>OUR SERVICES</h4>
+            <ul class="footer__links">
+              <li><a href="#">Concierge Assistance</a></li>
+              <li><a href="#">Flexible Booking Options</a></li>
+              <li><a href="#">Airport Transfers</a></li>
+              <li><a href="#">Wellness & Recreation</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>CONTACT US</h4>
+            <ul class="footer__links">
+              <li><a href="#">cyber.simar@gmail.com</a></li>
+            </ul>
+            <div class="footer__socials">
+              <a href="#"><img src="/static/images/facebook.png" alt="facebook" /></a>
+              <a href="#"><img src="/static/images/instagram.png" alt="instagram" /></a>
+              <a href="#"><img src="/static/images/youtube.png" alt="youtube" /></a>
+              <a href="#"><img src="/static/images/twitter.png" alt="twitter" /></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bar">
+          Copyright © 2023 Web Design Mastery. All rights reserved.
+        </div>
+    </footer>
+  </body>
