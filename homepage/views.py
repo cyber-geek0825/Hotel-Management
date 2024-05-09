@@ -51,11 +51,15 @@ def final_page(request):
         user_phone=request.POST['phone'].strip(' ')
         title=request.POST['title'].strip(' ')
         special_request=request.POST['special-requests']
-        if user_phone not in  Users.objects.all():
+        # if user_phone not in  Users.objects.all():
+        if not Users.objects.filter(user_phone=user_phone).exists():
             t=Users(title=title,user_first_name=first_name,user_last_name=last_name,user_email=user_email,user_phone=user_phone)
             t.save()
-        t=Booking(user_phone=user_phone,check_in=check_in,check_out=check_out,user_hotel=hotel_name,special_request=special_request)
-        t.save()
+        else:
+            t=Users.objects.get(user_phone=user_phone)
+        # t=Booking(user_phone=user_phone,check_in=check_in,check_out=check_out,user_hotel=hotel_name,special_request=special_request)
+        # t.save()
+        t.booking_set.create(first_name=first_name,last_name=last_name,check_in=check_in,check_out=check_out,user_hotel=hotel_name,special_request=special_request)
         return render(request,'final_page.html',{})
     else:
         return render(request,'final_page.html',{})

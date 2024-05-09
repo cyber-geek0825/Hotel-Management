@@ -29,21 +29,22 @@ class Users(models.Model):
     user_phone=models.CharField(max_length=250)
 
     def __str__(self):
-        return self.user_first_name
+        return self.user_phone
 
     def all_info(self):
         return [self.title,self.user_first_name,self.user_last_name,self.user_email,self.user_phone]
     
 class Booking(models.Model):
-    user_phone=models.CharField(max_length=250)
-    # user_phone=models.ForeignKey(Users,on_delete=models.CASCADE)
+    # user_phone=models.CharField(max_length=250)
+    user_phone=models.ForeignKey(Users,on_delete=models.CASCADE)
+    first_name=models.CharField(max_length=250)
+    last_name=models.CharField(max_length=250)
     check_in=models.DateField()
     check_out=models.DateField()
     user_hotel=models.CharField(max_length=250)
     special_request=models.TextField(null=True)
 
     def __str__(self):
-        return self.user_hotel
-
+        return self.first_name+' '+self.last_name
     def all_info(self):
-        return [self.user_phone,self.check_in,self.check_out,self.user_hotel,self.special_request]
+        return [self.first_name,self.last_name,self.check_in,self.check_out,self.user_hotel,self.special_request]
